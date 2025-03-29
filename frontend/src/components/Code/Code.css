@@ -1,10 +1,9 @@
-.code_block {
-    white-space: pre-wrap; /* Позволяет переносить строки */
-    overflow-wrap: break-word; /* Разрешает перенос длинных слов */
-    
+.code_block *{
+    font-family: 'Monaco', 'Menlo', monospace !important;
 }
 
 .code_block pre{
+    font-size: 14px !important;
     background: transparent !important;
     margin: 0 !important;
     padding: 0 !important;
