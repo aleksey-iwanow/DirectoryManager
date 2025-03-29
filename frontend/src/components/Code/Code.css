@@ -1,0 +1,15 @@
+.code_block {
+    white-space: pre-wrap; /* Позволяет переносить строки */
+    overflow-wrap: break-word; /* Разрешает перенос длинных слов */
+    
+}
+
+.code_block pre{
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.linenumber{
+    padding-right: 40px !important;
+}

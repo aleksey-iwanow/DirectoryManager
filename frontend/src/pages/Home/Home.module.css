@@ -1,0 +1,32 @@
+.home{
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+}
+
+
+.left, .right{
+    overflow: auto;
+    
+}
+
+.full{
+    width: 100%;
+}
+
+.left{
+    padding: 20px;
+    border-right: var(--border);
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.hide{
+    display: none;
+}
+
+.right{
+    flex: 1;
+    padding: 30px 40px;
+}

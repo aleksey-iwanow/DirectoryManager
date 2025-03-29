@@ -1,0 +1,21 @@
+.file_browser{
+    border-radius: var(--border_radius);
+    border: var(--border_small);
+    overflow: hidden;
+}
+
+.title{
+    background-color: var(--grey_dark);
+    
+    padding: 5px 10px;
+}
+
+.content{
+    height: 100%;
+}
+
+.file{
+    border-top: var(--border_small);
+    padding: 10px 40px;
+    min-height: 100px;
+}
