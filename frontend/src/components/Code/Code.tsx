@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Prism from 'prismjs';
 import 'prismjs/themes/prism-tomorrow.css'; // Импортируйте темную тему
 import 'prismjs/components/prism-markup'; // Импортируйте HTML через markup

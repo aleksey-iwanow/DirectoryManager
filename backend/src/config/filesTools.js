@@ -36,7 +36,7 @@ module.exports.readFileContent = (filePath, res) => {
 
     const extName = filePath.slice(filePath.lastIndexOf('.') + 1);
     const isTextFile = !isImage(extName);
-    const sizeInMB = (data.length / (1024 * 1024)).toFixed(2); // Размер в МБ
+    const sizeInMB = (data.length / (1024)).toFixed(2); // Размер в МБ
     let countLines = 0;
 
     if (isTextFile) {

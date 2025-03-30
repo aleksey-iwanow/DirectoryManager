@@ -24,6 +24,7 @@
   --tree_item_hover: #252c397b;
   --grey_dark: #181e26;
   --grey: #333c4a;
+  --grey_hover:  #2a323e;
   --border_color: #4c5460;
   --grey_light: #9198a1;
   --font_color: #f0f6fc;
@@ -64,6 +65,11 @@ a:hover {
   justify-content: center;
 }
 
+.flex_space_between{
+  justify-content: space-between;
+}
+
+
 .but_icon{
   border-radius: 5px;
   width: 32px;
@@ -72,8 +78,12 @@ a:hover {
   background-color: var(--grey_dark);
 }
 
-.margin_bottom{
+.margin_bottom10{
   margin-bottom: 10px;
+}
+
+.margin_bottom20{
+  margin-bottom: 20px;
 }
 
 .but_icon:hover{

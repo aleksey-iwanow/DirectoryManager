@@ -23,6 +23,14 @@
     overflow-x: overlay;
 }
 
+.file *{
+    font-family: 'Monaco', 'Menlo', monospace !important;
+}
+
+.file pre{
+    padding: 15px !important;
+}
+
 .progress_bar {
     position: fixed;
   top: 0;

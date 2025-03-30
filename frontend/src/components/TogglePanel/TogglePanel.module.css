@@ -1,0 +1,32 @@
+.container_toggle{
+    display: flex;
+    border-radius: 5px;
+    background-color: var(--grey);
+}
+
+.item_toggle{
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    padding: 4px 12px;
+    position: relative;
+}
+
+.active{
+    border: var(--border_small);
+    background-color: black;
+}
+
+.disable:hover{
+    background-color: var(--grey_hover);
+    
+}
+
+.line_toggle:before{
+    content: "";
+    position: absolute;
+    right: 0px;
+    top: 15%;
+    height: 70%;
+    width: 1px;
+    background-color: var(--grey_light);
+}

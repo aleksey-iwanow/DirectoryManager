@@ -3,13 +3,16 @@ import styles from "./FileBrowser.module.css";
 import ListItem from "../ListItem/ListItem";
 import { useParams } from "react-router-dom";
 import Code from "../Code/Code";
-import LinearProgress from "@mui/material/LinearProgress";
+import TogglePanel from "../TogglePanel/TogglePanel";
 
 
 export default function FileBrowser() {
   const { "*": path } = useParams();
   const [content, setContent] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [textBlockStyleSelected, setTextBlockStyleSelected] = useState("");
+  const [toggleElements, setToggleElements] = useState<string[]>([]);
+  
 
   const loadFileContent = async () => {
     try {
@@ -46,6 +49,7 @@ export default function FileBrowser() {
       );
     } else {
       if (content?.isImage) {
+        
         return (
           <div className={styles.file}>
             <img src={`http://localhost:8080/download/${content.data}`} alt={content.name} />
@@ -54,7 +58,9 @@ export default function FileBrowser() {
       } else {
         return (
           <div className={styles.file}>
-            <Code language={content.extName}>{content.data}</Code>
+            {textBlockStyleSelected == "Text" ? 
+            <pre>{content.data}</pre>
+            : <Code language={content.extName}>{content.data}</Code>}
           </div>
         );
       }
@@ -65,6 +71,12 @@ export default function FileBrowser() {
     const fetchData = async () => {
       setIsLoading(true);
       const data = await loadFileContent();
+      if (data.isImage){
+        setToggleElements([]);
+      }
+      else{
+        setToggleElements(["Code", "Text"]);
+      }
       setContent(data);
       setIsLoading(false);
     };
@@ -80,7 +92,18 @@ export default function FileBrowser() {
         <div className={styles.progress_bar}></div>
       )}
       <div className={styles.title}>
-        <p>{content ? (content.name || "Uploads") : ""}</p>
+        {content && (!content.isFolder ? <div className="flex_center_align flex_space_between">
+          <div className="flex_center_align gap">
+            {toggleElements.length > 0 && 
+            <TogglePanel onchange={setTextBlockStyleSelected} elements={toggleElements}/>}
+            <p>{content.size}kb</p>
+            <p>{content.countLines} lines</p>
+          </div>
+          <div className="flex_center_align">
+            
+          </div>
+        </div>
+        : <p>{content.name}</p>)}
       </div>
       <div className={styles.content}>
         {content && renderContent()}
