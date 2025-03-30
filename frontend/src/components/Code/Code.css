@@ -1,14 +1,17 @@
 .code_block *{
     font-family: 'Monaco', 'Menlo', monospace !important;
 }
-
-.code_block pre{
-    font-size: 14px !important;
-    background: transparent !important;
-    margin: 0 !important;
-    padding: 0 !important;
+.code_block {
+    /* Убираем фон */
+    
+    background: none !important;
+    margin: 0 !important; /* Убираем отступы */
 }
 
-.linenumber{
-    padding-right: 40px !important;
+.line-number {
+    display: inline-block;
+    width: 30px; /* Ширина для нумерации строк */
+    text-align: right; /* Выравнивание по правому краю */
+    color: #888; /* Цвет для нумерации строк */
+    user-select: none; /* Запрет выделения текста */
 }

@@ -1,19 +1,36 @@
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { nightOwl as theme } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import './Code.css'
+import React, { useEffect, useRef } from 'react';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism-tomorrow.css'; // Импортируйте темную тему
+import 'prismjs/components/prism-markup'; // Импортируйте HTML через markup
+import 'prismjs/components/prism-javascript'; // Импортируйте JavaScript
+import 'prismjs/components/prism-json'; // Импортируйте JSON
+import 'prismjs/components/prism-css'; // Импортируйте CSS
+import './Code.css';
 
 interface CodeProps {
     language: string;
-    children: any;
+    children: string; // Измените тип на string, так как мы ожидаем текст
     className_?: string;
 }
 
-export default function Code ({className_, language, children }:CodeProps) {
+export default function Code({ className_, language, children }: CodeProps) {
+    const codeRef = useRef<HTMLPreElement>(null);
+
+    useEffect(() => {
+        // Подсветка синтаксиса после рендеринга
+        if (codeRef.current) {
+            Prism.highlightElement(codeRef.current);
+        }
+    }, [children]); // Запускаем эффект при изменении текста
+
+
+
     return (
-    <div className={`code_block ${className_}`}>
-        <SyntaxHighlighter language={language} style={theme} showLineNumbers>
-            {children}
-        </SyntaxHighlighter>
-    </div>
+            <pre className={`code_block ${className_}`}>
+                <code ref={codeRef} className={`language-${language}`}>
+                    {children}
+                </code>
+            </pre>
+        
     );
-};
+}

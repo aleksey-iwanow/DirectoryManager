@@ -1,73 +1,86 @@
 import { useEffect, useState } from "react";
 import styles from "./FileBrowser.module.css";
 import ListItem from "../ListItem/ListItem";
-import { Link, useLocation, useParams, useResolvedPath } from "react-router-dom";
-import { getPreviousFolder } from "../../utils/FilesManager";
+import { useParams } from "react-router-dom";
 import Code from "../Code/Code";
+import LinearProgress from "@mui/material/LinearProgress";
 
 
 export default function FileBrowser() {
-  const {"*": path}  = useParams();
-  
-  const [content, setContent] = useState<any | null>();
+  const { "*": path } = useParams();
+  const [content, setContent] = useState<any | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const loadFileContent = async () => {
     try {
       const response = await fetch(`http://localhost:8080/uploads/${path}`, {
-        method: 'GET',
-        headers: {'Content-Type': 'application/json'}
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
       });
-      if (!response.ok){
-        var data = await response.json();
-        return {mes: data.message, err: true}
+      if (!response.ok) {
+        const data = await response.json();
+        return { mes: data.message, err: true };
       }
-      return await response.json();
+      const data = await response.json();
+      return data;
     } catch (error) {
       console.error(error);
       return null;
     }
-  }
+  };
 
   function renderContent() {
-    if (content.err){
+    if (content?.err) {
       return <pre>{content.mes}</pre>;
     }
-    if (content.isFolder) {
+    if (content?.isFolder) {
       return (
         <div className={styles.folder}>
-          {
-            path &&
-            <ListItem name="..." path={content.parentPath} isFolder={true}></ListItem>
-          }
-          {content.data.map((item:any) => (
-            <ListItem name={item.name} path={item.path} isFolder={item.isFolder}></ListItem>
-            
+          {path && (
+            <ListItem key="..." name="..." path={content.parentPath} isFolder={true}></ListItem>
+          )}
+          {content.data.map((item: any) => (
+            <ListItem key={item.name} name={item.name} path={item.path} isFolder={item.isFolder}></ListItem>
           ))}
         </div>
       );
     } else {
-      return <div className={styles.file}>
-        <Code language={content.type}>{content.data}</Code>
-      </div>;
+      if (content?.isImage) {
+        return (
+          <div className={styles.file}>
+            <img src={`http://localhost:8080/download/${content.data}`} alt={content.name} />
+          </div>
+        );
+      } else {
+        return (
+          <div className={styles.file}>
+            <Code language={content.extName}>{content.data}</Code>
+          </div>
+        );
+      }
     }
   }
 
-  function fetchData() {
-    const fileContent = loadFileContent();
-    fileContent.then(fl => {
-      setContent(fl);
-    })
-    
-  }
-
   useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      const data = await loadFileContent();
+      setContent(data);
+      setIsLoading(false);
+    };
+
     fetchData();
   }, [path]);
 
+
   return (
     <div className={styles.file_browser}>
+      {/* Отображаем полосу загрузки */}
+      {isLoading && (
+        <div className={styles.progress_bar}></div>
+      )}
       <div className={styles.title}>
-        <p>{content && (content.name || 'Uploads')}</p>
+        <p>{content ? (content.name || "Uploads") : ""}</p>
       </div>
       <div className={styles.content}>
         {content && renderContent()}

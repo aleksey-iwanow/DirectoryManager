@@ -13,11 +13,34 @@
 
 .content{
     height: 100%;
+    
 }
 
 .file{
     border-top: var(--border_small);
-    padding: 10px 40px;
+    padding: 0;
     min-height: 100px;
     overflow-x: overlay;
+}
+
+.progress_bar {
+    position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px; /* Высота полосы загрузки */
+  background-color: #2196f3; /* Цвет полосы загрузки */
+  animation: loading 3s linear forwards; /* Анимация загрузки */
+}
+
+@keyframes loading {
+  0% {
+    width: 0%; /* Начальная ширина */
+  }
+  90% {
+    width: 80%; /* Плавное увеличение ширины до 95% */
+  }
+  100% {
+    width: 100%; /* Резкое завершение на 100% */
+  }
 }

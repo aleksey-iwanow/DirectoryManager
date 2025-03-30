@@ -24,20 +24,20 @@ export default function Home() {
                     path: `/blob/${split_path.slice(0, index + 1).join('/')}`,
                 }
             ));
-            return (<>
+            return (<div>
                 <span style={{ margin: "0 5px" }}>/</span>
-                <Link to="/">uploads</Link>
+                <Link to="/blob/">uploads</Link>
                 {links.map((link, index) => (
-                    <>
+                    <span key={index}>
                         <span style={{ margin: "0 5px" }}>/</span>
                         {split_path.length - 1 == index ?
                             <span className='span_bold'>{link.name}</span>
                             :
                             <Link to={link.path}>{link.name}</Link>
                         }
-                    </>
+                    </span>
                 ))}
-            </>);
+            </div>);
         }
     }
 
@@ -59,7 +59,7 @@ export default function Home() {
                 <div className={`but_icon ${activeTree ? styles.hide : ''}`} onClick={handleActiveTree}>
                     <img src='/icons/show.png' />
                 </div>
-                <pre>{getPathLinks()}</pre>
+               {getPathLinks()}
             </div>
             <FileBrowser></FileBrowser>
         </div>

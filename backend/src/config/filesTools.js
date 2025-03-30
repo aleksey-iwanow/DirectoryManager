@@ -2,10 +2,28 @@ const fs = require('fs');
 const { console } = require('inspector');
 const path = require('path');
 const getLocalPath = require('./getLocalPath');
+const {fileTypeFromStream} = require('file-type');
+
 
 module.exports.getUploadsPath = (filename) => {
     return path.join(__dirname, '../../uploads', filename);
 }
+
+function getPreviousFolder(path) {
+  const parts = path.split('/');
+  parts.pop();
+
+  if (parts.length > 0) {
+      return parts.join('/').slice(1);
+  }
+
+  return '';
+}
+
+const isImage = (extName) => {
+  const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'];
+  return imageExtensions.includes(extName.toLowerCase());
+};
 
 
 // Функция для чтения содержимого файла
@@ -15,26 +33,27 @@ module.exports.readFileContent = (filePath, res) => {
       console.error(err);
       return res.status(500).json({ message: 'Internal server error.' });
     }
-    // Возвращаем содержимое файла
+
+    const extName = filePath.slice(filePath.lastIndexOf('.') + 1);
+    const isTextFile = !isImage(extName);
+    const sizeInMB = (data.length / (1024 * 1024)).toFixed(2); // Размер в МБ
+    let countLines = 0;
+
+    if (isTextFile) {
+      countLines = data.toString().split('\n').length; // Количество строк
+    }
+
     return res.status(200).json({ 
-      data: data.toString(), 
-      type: filePath.slice(filePath.lastIndexOf('.') + 1), 
+      data: isTextFile ? data.toString() : getLocalPath(filePath), 
+      extName: extName, 
+      isImage: !isTextFile,
       name: path.basename(filePath),
-      isFolder: false 
+      isFolder: false,
+      size: sizeInMB, // Размер файла в МБ
+      countLines: isTextFile ? countLines : null // Количество строк, если это текст
     });
   });
 };
-
-function getPreviousFolder(path) {
-    const parts = path.split('/');
-    parts.pop();
-
-    if (parts.length > 0) {
-        return parts.join('/').slice(1);
-    }
-
-    return '';
-}
 
 // Функция для чтения содержимого директории
 module.exports.readDirectoryContent = async (dirPath, res) => {

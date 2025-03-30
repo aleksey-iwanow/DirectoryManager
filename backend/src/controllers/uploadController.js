@@ -3,6 +3,7 @@ const fs = require('fs');
 const {getUploadsPath, readFileContent, readDirectoryContent} = require('../config/filesTools')
 const scanDirectory = require('../config/scanDirectory')
 
+
 module.exports.uploadFile = (req, res) => {
     if (!req.file) {
         return res.status(400).json({ message: 'No file uploaded.' });
