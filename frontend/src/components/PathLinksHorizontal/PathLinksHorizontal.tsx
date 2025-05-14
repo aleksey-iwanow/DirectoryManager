@@ -22,7 +22,7 @@ export default function PathLinksHorizontal({ path, first_link_url = "/blob/", f
             )));
         }
 
-    })
+    }, [])
 
     return (<div>
         <span style={{ margin: "0 5px" }}>/</span>
