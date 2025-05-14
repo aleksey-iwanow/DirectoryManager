@@ -1,9 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const { upload } = require('./config/upload.js');
-const { uploadFile, getFiles, getTree } = require('./controllers/uploadController.js')
+const { uploadFile, getFiles, getTree, downloadFile } = require('./controllers/uploadController.js')
 const app = express();
-const path = require('path');
 const PORT = process.env.PORT || 8080;
 
 // Устанавливаем CORS политики
@@ -16,21 +15,7 @@ app.post('/upload', upload.single('file'), uploadFile);
 app.get('/uploads/:filename(*)', getFiles);
 
 // Маршрут для получения файла из директории uploads
-app.get('/download/:filename(*)', (req, res) => {
-  const { filename } = req.params;
-  const filePath = path.join(__dirname, '../uploads', filename);
-
-  // Проверяем существование файла
-  res.sendFile(filePath, (err) => {
-    if (err) {
-      if (err.code === 'ENOENT') {
-        return res.status(404).send('Файл не найден: ' + filePath);
-      }
-      console.error('Ошибка при скачивании файла:', err);
-      return res.status(500).send('Ошибка при скачивании файла');
-    }
-  });
-});
+app.get('/download/:filename(*)', downloadFile);
 
 // GET endpoint для получения дерева файлов
 app.get('/tree/:filename(*)', getTree);

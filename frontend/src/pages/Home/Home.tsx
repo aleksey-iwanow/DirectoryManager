@@ -5,6 +5,7 @@ import FilesTree from '../../components/FilesTree/FilesTree';
 import styles from './Home.module.css';
 
 import {useState } from 'react';
+import PathLinksHorizontal from '../../components/PathLinksHorizontal/PathLinksHorizontal';
 
 
 export default function Home() {
@@ -13,32 +14,6 @@ export default function Home() {
 
     const handleActiveTree = () => {
         setActiveTree(!activeTree);
-    }
-
-    const getPathLinks = () => {
-        if (path) {
-            const split_path = path.split('/');
-            const links = split_path.map((name, index) => (
-                {
-                    name: name,
-                    path: `/blob/${split_path.slice(0, index + 1).join('/')}`,
-                }
-            ));
-            return (<div>
-                <span style={{ margin: "0 5px" }}>/</span>
-                <Link to="/blob/">uploads</Link>
-                {links.map((link, index) => (
-                    <span key={index}>
-                        <span style={{ margin: "0 5px" }}>/</span>
-                        {split_path.length - 1 == index ?
-                            <span className='span_bold'>{link.name}</span>
-                            :
-                            <Link to={link.path}>{link.name}</Link>
-                        }
-                    </span>
-                ))}
-            </div>);
-        }
     }
 
 
@@ -59,7 +34,7 @@ export default function Home() {
                 <div className={`but_icon ${activeTree ? styles.hide : ''}`} onClick={handleActiveTree}>
                     <img src='/icons/show.png' />
                 </div>
-               {getPathLinks()}
+               {<PathLinksHorizontal path={path}/>}
             </div>
             <FileBrowser></FileBrowser>
         </div>

@@ -27,8 +27,8 @@ const isImage = (extName) => {
 
 
 // Функция для чтения содержимого файла
-module.exports.readFileContent = (filePath, res) => {
-  fs.readFile(filePath, (err, data) => {
+module.exports.readFileContent = async (filePath, res) => {
+  await fs.readFile(filePath, (err, data) => {
     if (err) {
       console.error(err);
       return res.status(500).json({ message: 'Internal server error.' });

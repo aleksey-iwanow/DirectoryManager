@@ -1,26 +1,24 @@
 .container_toggle{
     display: flex;
+    align-items: center;
     border-radius: 5px;
-    border: var(--border_small);
     background-color: var(--grey);
-    overflow: hidden;
+    border: var(--border_small);
 }
 
 .item_toggle{
-    border: 1px solid var(--grey);
+    border-radius: 5px;
     padding: 4px 12px;
     position: relative;
+    color: rgb(195, 197, 202);
 }
 
-.active{
-    border: 1px solid var(--grey_light);
-    border-radius: 5px;
-    background-color: black;
+.item_toggle img{
+    height: 20px;
 }
 
-.disable:hover{
+.item_toggle:hover{
     background-color: var(--grey_hover);
-    
 }
 
 .line_toggle:before{

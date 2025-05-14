@@ -4,6 +4,7 @@ import ListItem from "../ListItem/ListItem";
 import { useParams } from "react-router-dom";
 import Code from "../Code/Code";
 import TogglePanel from "../TogglePanel/TogglePanel";
+import ButtonsPanel from "../ButtonsPanel/ButtonsPanel";
 
 
 export default function FileBrowser() {
@@ -12,6 +13,12 @@ export default function FileBrowser() {
   const [isLoading, setIsLoading] = useState(false);
   const [textBlockStyleSelected, setTextBlockStyleSelected] = useState("");
   const [toggleElements, setToggleElements] = useState<string[]>([]);
+  
+  const buttons = [
+    { name: "Raw", onClick: () => window.location.href = `/raw/${path}` },
+    { img: "/icons/copy.png", onClick: () => console.log("copy clicked") },
+    { img: "/icons/download.png", onClick: () => console.log("copy clicked") },
+  ]
   
 
   const loadFileContent = async () => {
@@ -97,10 +104,10 @@ export default function FileBrowser() {
             {toggleElements.length > 0 && 
             <TogglePanel onchange={setTextBlockStyleSelected} elements={toggleElements}/>}
             <p>{content.size}kb</p>
-            <p>{content.countLines} lines</p>
+            {!content.isImage && <p>{content.countLines} lines</p>}
           </div>
           <div className="flex_center_align">
-            
+          <ButtonsPanel elements={buttons} />
           </div>
         </div>
         : <p>{content.name}</p>)}
