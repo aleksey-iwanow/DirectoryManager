@@ -9,24 +9,19 @@ need to run backend and frontend using the commands below:
 
 ## What's happening?
 the application reflects the internals of the directory ```/backend/uploads```
-<details>
-<summary>📷 screenshot</summary>
-
-![img](https://github.com/aleksey-iwanow/DirectoryManager/blob/main/screenshots_/image1.png)
-
-</details>
+![img](https://github.com/aleksey-iwanow/DirectoryManager/blob/main/screenshots_img/image1.png)
 
 You can also open a preview file, whether it is code or an image
 <details>
 <summary>📷 screenshot 1</summary>
 
-![img](https://github.com/aleksey-iwanow/DirectoryManager/blob/main/screenshots_/image2.png)
+![img](https://github.com/aleksey-iwanow/DirectoryManager/blob/main/screenshots_img/image2.png)
 
 </details>
 <details>
 <summary>📷 screenshot 2</summary>
 
-![img](https://github.com/aleksey-iwanow/DirectoryManager/blob/main/screenshots_/image3.png)
+![img](https://github.com/aleksey-iwanow/DirectoryManager/blob/main/screenshots_img/image3.png)
 
 </details>
 
