@@ -12,7 +12,7 @@ the application reflects the internals of the directory ```/backend/uploads```
 <details>
 <summary>📷 screenshot</summary>
 
-![img]("https://github.com/aleksey-iwanow/DirectoryManager/blob/main/screenshots_/image1.png")
+![img](https://github.com/aleksey-iwanow/DirectoryManager/blob/main/screenshots_/image1.png)
 
 </details>
 
@@ -20,13 +20,13 @@ You can also open a preview file, whether it is code or an image
 <details>
 <summary>📷 screenshot 1</summary>
 
-![img]("https://github.com/aleksey-iwanow/DirectoryManager/blob/main/screenshots_/image2.png")
+![img](https://github.com/aleksey-iwanow/DirectoryManager/blob/main/screenshots_/image2.png)
 
 </details>
 <details>
 <summary>📷 screenshot 2</summary>
 
-![img]("https://github.com/aleksey-iwanow/DirectoryManager/blob/main/screenshots_/image3.png")
+![img](https://github.com/aleksey-iwanow/DirectoryManager/blob/main/screenshots_/image3.png)
 
 </details>
 
